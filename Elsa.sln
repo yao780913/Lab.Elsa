@@ -4,6 +4,8 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaConsole", "ElsaConsole\ElsaConsole.csproj", "{B317710B-1DE4-E415-7957-D0E02CA9E204}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaWeb", "ElsaWeb\ElsaWeb.csproj", "{8B38C87D-0BE3-4001-A094-042D1AB78B73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{B317710B-1DE4-E415-7957-D0E02CA9E204}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B317710B-1DE4-E415-7957-D0E02CA9E204}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B317710B-1DE4-E415-7957-D0E02CA9E204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
