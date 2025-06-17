@@ -1,4 +1,5 @@
 ﻿using Elsa.Extensions;
+using Elsa.Scheduling.Activities;
 using Microsoft.Extensions.DependencyInjection;
 using Elsa.Workflows.Activities;
 using Elsa.Workflows;
@@ -18,6 +19,11 @@ var activity = new Sequence
     Activities =
     {
         new WriteLine("Hello World!"),
+        new Delay()
+        {
+            Id = "DelayActivity",
+            TimeSpan = new (TimeSpan.FromSeconds(2))
+        },
         new WriteLine("We can do more than a one-liner!")
     }
 };
