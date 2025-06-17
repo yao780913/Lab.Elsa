@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaConsole", "ElsaConsole\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaWeb", "ElsaWeb\ElsaWeb.csproj", "{8B38C87D-0BE3-4001-A094-042D1AB78B73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaStudioBlazorWasm", "ElsaStudioBlazorWasm\ElsaStudioBlazorWasm.csproj", "{B6431D54-FFAC-4444-99BE-C3756D254952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6431D54-FFAC-4444-99BE-C3756D254952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6431D54-FFAC-4444-99BE-C3756D254952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6431D54-FFAC-4444-99BE-C3756D254952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6431D54-FFAC-4444-99BE-C3756D254952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

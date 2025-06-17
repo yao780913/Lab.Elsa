@@ -11,6 +11,7 @@ public class HttpHelloWorld : WorkflowBase
         var queryStringsVariable = builder.WithVariable<IDictionary<string, object>>();
         var messageVariable = builder.WithVariable<string>();
 
+        // http://localhost:5190/workflows/hello-world?message=hello%20world
         builder.Root = new Sequence
         {
             Activities =
