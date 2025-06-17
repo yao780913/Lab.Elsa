@@ -19,11 +19,6 @@ var activity = new Sequence
     Activities =
     {
         new WriteLine("Hello World!"),
-        new Delay()
-        {
-            Id = "DelayActivity",
-            TimeSpan = new (TimeSpan.FromSeconds(2))
-        },
         new WriteLine("We can do more than a one-liner!")
     }
 };

@@ -1,25 +1,24 @@
 using Elsa.Extensions;
-using ElsaWeb.Workflows;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddElsa(elsa =>
-{
-    elsa.AddWorkflow<HttpHelloWorld>();
-    elsa.UseHttp(http => http.ConfigureHttpOptions = options =>
-    {
-        options.BaseUrl = new Uri("https://localhost:5001");
-        options.BasePath = "/workflows";
-    });
-});
+// Add Elsa services.
+services.AddElsa(elsa => elsa
+    .AddWorkflowsFrom<Program>()
+        
+    // Enable Elsa HTTP module (for HTTP related activities). 
+    .UseHttp()
+);
 
+// Configure middleware pipeline.
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
+if (app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+
+// Add Elsa HTTP middleware (to handle requests mapped to HTTP Endpoint activities)
 app.UseWorkflows();
+
+// Start accepting requests.
 app.Run();
