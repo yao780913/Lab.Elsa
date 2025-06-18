@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{53
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.Samples.ConsoleApp.Composition", "Elsa.Samples.ConsoleApp.Composition\Elsa.Samples.ConsoleApp.Composition.csproj", "{C1104290-A725-4BCD-BB8A-312F6C77C011}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elsa.Samples.AspNet.Onboarding.WorkflowServer", "Elsa.Samples.AspNet.Onboarding.WorkflowServer\Elsa.Samples.AspNet.Onboarding.WorkflowServer.csproj", "{77F8E3A8-742C-4C3B-9DA9-935ABE779C0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F8E3A8-742C-4C3B-9DA9-935ABE779C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F8E3A8-742C-4C3B-9DA9-935ABE779C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F8E3A8-742C-4C3B-9DA9-935ABE779C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F8E3A8-742C-4C3B-9DA9-935ABE779C0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

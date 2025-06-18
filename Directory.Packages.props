@@ -19,6 +19,7 @@
     <PackageVersion Include="Elsa.Liquid" Version="3.4.0" />
     <PackageVersion Include="Elsa.Api.Client" Version="3.4.0" />
     <PackageVersion Include="Elsa.Identity" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Webhooks" Version="3.4.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.17" />
