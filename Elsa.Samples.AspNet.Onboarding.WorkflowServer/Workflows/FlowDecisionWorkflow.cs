@@ -3,7 +3,7 @@ using Elsa.Workflows.Activities;
 using Elsa.Workflows.Activities.Flowchart.Activities;
 using Endpoint = Elsa.Workflows.Activities.Flowchart.Models.Endpoint;
 
-namespace Elsa.Samples.ConsoleApp.Workflows;
+namespace Elsa.Samples.AspNet.Onboarding.WorkflowServer.Workflows;
 
 public class FlowDecisionWorkflow : WorkflowBase
 {

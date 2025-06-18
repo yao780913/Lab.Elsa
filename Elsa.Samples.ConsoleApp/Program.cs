@@ -1,7 +1,7 @@
 ﻿using Elsa.Extensions;
+using Elsa.Samples.ConsoleApp.Workflows;
 using Microsoft.Extensions.DependencyInjection;
 using Elsa.Workflows;
-using ElsaConsole.Workflows;
 
 // 设置服务容器。
 var services = new ServiceCollection();

@@ -2,7 +2,7 @@
 using Elsa.Workflows.Activities;
 using Elsa.Workflows.Memory;
 
-namespace ElsaConsole.Workflows;
+namespace Elsa.Samples.ConsoleApp.Workflows;
 
 public class IfConditionWorkflow : WorkflowBase
 {

@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddElsa(elsa =>
 {
     // Add workflow.
+    elsa.AddWorkflow<FlowDecisionWorkflow>();
     elsa.AddWorkflow<OnboardingWorkflow>();
 
     // Configure management feature to use EF Core.
@@ -34,7 +35,10 @@ builder.Services.AddElsa(elsa =>
 
     // Use default authentication (JWT + ApiKey).
     elsa.UseDefaultAuthentication(auth => auth.UseAdminApiKey());
-
+    
+    // Enable C# workflow expressions.
+    elsa.UseCSharp();
+    
     elsa.UseJavaScript();
 
     // Enable SignalR for sending events to Elsa Studio for real-time updates.

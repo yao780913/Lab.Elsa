@@ -9,6 +9,7 @@
         <PackageReference Include="Elsa" />
         <PackageReference Include="Elsa.Identity" />
         <PackageReference Include="Elsa.Webhooks" />
+        <PackageReference Include="Elsa.CSharp" />
         <PackageReference Include="Elsa.Workflows.Api" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     </ItemGroup>

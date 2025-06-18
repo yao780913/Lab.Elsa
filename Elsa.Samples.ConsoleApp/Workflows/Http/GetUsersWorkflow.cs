@@ -4,7 +4,7 @@ using Elsa.Workflows;
 using Elsa.Workflows.Activities;
 using Microsoft.AspNetCore.Http;
 
-namespace ElsaConsole.Workflows.Http;
+namespace Elsa.Samples.ConsoleApp.Workflows.Http;
 
 public class GetUsersWorkflow : WorkflowBase
 {

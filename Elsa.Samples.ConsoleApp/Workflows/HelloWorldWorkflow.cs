@@ -1,7 +1,7 @@
 ﻿using Elsa.Workflows;
 using Elsa.Workflows.Activities;
 
-namespace ElsaConsole.Workflows;
+namespace Elsa.Samples.ConsoleApp.Workflows;
 
 public class HelloWorldWorkflow : WorkflowBase
 {
