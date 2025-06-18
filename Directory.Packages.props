@@ -1,27 +1,27 @@
 <Project>
   <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Elsa" Version="3.4.0" />
-    <PackageReference Include="Elsa.Core" Version="2.15.1" />
-    <PackageReference Include="Elsa.Http" Version="3.4.0" />
-    <PackageReference Include="Elsa.Scheduling" Version="3.4.0" />
-    <PackageReference Include="Elsa.Studio" Version="3.4.0" />
-    <PackageReference Include="Elsa.Studio.Core.BlazorWasm" Version="3.4.0" />
-    <PackageReference Include="Elsa.Studio.Login.BlazorWasm" Version="3.4.0" />
-    <PackageReference Include="Elsa.EntityFrameworkCore" Version="3.4.0" />
-    <PackageReference Include="Elsa.EntityFrameworkCore.Sqlite" Version="3.4.0" />
-    <PackageReference Include="Elsa.Workflows.Api" Version="3.4.0" />
-    <PackageReference Include="Elsa.CSharp" Version="3.4.0" />
-    <PackageReference Include="Elsa.JavaScript" Version="3.4.0" />
-    <PackageReference Include="Elsa.Liquid" Version="3.4.0" />
-    <PackageReference Include="Elsa.Api.Client" Version="3.4.0" />
-    <PackageReference Include="Elsa.Identity" Version="3.4.0" />
+    <PackageVersion Include="Elsa" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Core" Version="2.15.1" />
+    <PackageVersion Include="Elsa.Http" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Scheduling" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Studio" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Studio.Core.BlazorWasm" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Studio.Login.BlazorWasm" Version="3.4.0" />
+    <PackageVersion Include="Elsa.EntityFrameworkCore" Version="3.4.0" />
+    <PackageVersion Include="Elsa.EntityFrameworkCore.Sqlite" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Workflows.Api" Version="3.4.0" />
+    <PackageVersion Include="Elsa.CSharp" Version="3.4.0" />
+    <PackageVersion Include="Elsa.JavaScript" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Liquid" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Api.Client" Version="3.4.0" />
+    <PackageVersion Include="Elsa.Identity" Version="3.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.17" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.17" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.17" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.17" />
   </ItemGroup>
 </Project>

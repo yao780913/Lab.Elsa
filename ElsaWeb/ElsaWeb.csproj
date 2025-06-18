@@ -5,5 +5,21 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-  
+
+  <ItemGroup>
+    <PackageReference Include="Elsa" />
+    <PackageReference Include="Elsa.Core" />
+    <PackageReference Include="Elsa.Http" />
+    <PackageReference Include="Elsa.Scheduling" />
+    <PackageReference Include="Elsa.Studio" />
+    <PackageReference Include="Elsa.EntityFrameworkCore" />
+    <PackageReference Include="Elsa.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Elsa.Workflows.Api" />
+    <PackageReference Include="Elsa.CSharp" />
+    <PackageReference Include="Elsa.JavaScript" />
+    <PackageReference Include="Elsa.Liquid" />
+    <PackageReference Include="Elsa.Api.Client" />
+    <PackageReference Include="Elsa.Identity" />
+  </ItemGroup>
+
 </Project>

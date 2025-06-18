@@ -1,5 +1,4 @@
 ﻿using Elsa.Extensions;
-using Elsa.Scheduling.Activities;
 using Microsoft.Extensions.DependencyInjection;
 using Elsa.Workflows.Activities;
 using Elsa.Workflows;
