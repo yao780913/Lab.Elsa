@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaWeb", "ElsaWeb\ElsaWeb.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basic", "Basic", "{8C45738C-561F-47B5-A9A2-CAE95580436A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElsaServer", "ElsaServer\ElsaServer.csproj", "{40E54071-8E53-4591-8A4B-FB9E1AE56BDC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{53FC9C72-94F1-4D07-AE08-683C6C9FCF6F}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
@@ -36,10 +34,6 @@ Global
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B38C87D-0BE3-4001-A094-042D1AB78B73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40E54071-8E53-4591-8A4B-FB9E1AE56BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40E54071-8E53-4591-8A4B-FB9E1AE56BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40E54071-8E53-4591-8A4B-FB9E1AE56BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40E54071-8E53-4591-8A4B-FB9E1AE56BDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1104290-A725-4BCD-BB8A-312F6C77C011}.Release|Any CPU.ActiveCfg = Release|Any CPU

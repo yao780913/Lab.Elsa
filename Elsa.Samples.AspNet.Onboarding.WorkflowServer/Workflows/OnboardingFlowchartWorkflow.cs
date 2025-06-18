@@ -22,6 +22,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         // 1. 建立員工帳號 httpEndpoint
         var onboardingEndpoint = new HttpEndpoint
         {
+            Name = "Onboarding Endpoint",
             Path = new ("onboarding"),
             SupportedMethods = new ([HttpMethods.Post]),
             CanStartWorkflow = true,
@@ -30,12 +31,14 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         // 取得 correlationId 並存到變數
         var setCorrelationId = new SetVariable
         {
+            Name = "Set Correlation ID",
             Variable = correlationIdVar,
             Value = new(context => context.GetWorkflowExecutionContext().CorrelationId)
         };
         // 回傳 WorkflowInstanceId 給 client
         var writeWorkflowInstanceId = new WriteHttpResponse
         {
+            Name = "return  Workflow Instance ID",
             Content = new(context => $"{{ \"workflowInstanceId\": \"{context.GetWorkflowExecutionContext().Id}\" }}"),
             ContentType = new("application/json")
         };
@@ -43,6 +46,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         // 2. 新增審核 httpEndpoint
         var reviewEndpoint = new HttpEndpoint
         {
+            Name = "Review Endpoint",
             Path = new ("review"),
             SupportedMethods = new ([HttpMethods.Post]),
             CanStartWorkflow = false,
@@ -50,11 +54,11 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         };
 
         // Activities
-        var createAccount = new WriteLine("建立員工帳號");
-        var addToFD = new WriteLine("新增帳號至 FD");
-        var addToPY = new WriteLine("新增帳號至 PY");
-        var notifySuccess = new WriteLine("通知結果 - 成功");
-        var notifyFailure = new WriteLine("通知結果 - 失敗");
+        var createAccount = new WriteLine("建立員工帳號") { Name = "建立帳號" };
+        var addToFD = new WriteLine("新增帳號至 FD") { Name = "新增帳號至 FD" };
+        var addToPY = new WriteLine("新增帳號至 PY") { Name = "新增帳號至 PY" };
+        var notifySuccess = new WriteLine("通知結果 - 成功") { Name = "通知結果 - 成功" };
+        var notifyFailure = new WriteLine("通知結果 - 失敗") { Name = "通知結果 - 失敗" };
         var finishApproved = new Finish { Name = "審核通過" };
         var finishRejected = new Finish { Name = "審核失敗" };
 
