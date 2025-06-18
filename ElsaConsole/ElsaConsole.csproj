@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Elsa" />
+    <PackageReference Include="Elsa.Http" />
   </ItemGroup>
 
 </Project>
