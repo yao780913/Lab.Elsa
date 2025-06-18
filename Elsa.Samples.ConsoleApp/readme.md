@@ -1,6 +1,6 @@
 # readme
 
-## ElsaConsole
+## Elsa.Samples
 
 - `HelloWorldWorkflow.cs`
     - A simple workflow that demonstrates the basic structure of an Elsa workflow.
@@ -13,3 +13,6 @@
 - `GetUsersWorkflow.cs`
     - A workflow that demonstrates how to make outbound HTTP requests.
     - It includes activities that send HTTP requests and handle responses.
+- `FlowDecisionWorkflow.cs`
+    - A workflow that demonstrates the use of flow decisions to control the execution path.
+    - It includes multiple branches and conditions to illustrate flow control.

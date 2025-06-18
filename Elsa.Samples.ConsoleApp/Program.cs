@@ -19,4 +19,5 @@ var workflowRunner = serviceProvider.GetRequiredService<IWorkflowRunner>();
 // await workflowRunner.RunAsync<HelloWorldWorkflow>();
 // await workflowRunner.RunAsync<IfConditionWorkflow>();
 // await workflowRunner.RunAsync<OutboundHttpRequestsWorkflow>();
-await workflowRunner.RunAsync<SwitchConditionWorkflow>();
+// await workflowRunner.RunAsync<SwitchConditionWorkflow>();
+await workflowRunner.RunAsync<FlowDecisionWorkflow>();
