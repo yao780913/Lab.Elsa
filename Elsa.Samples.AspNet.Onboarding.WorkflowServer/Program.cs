@@ -13,6 +13,7 @@ builder.Services.AddElsa(elsa =>
     // Add workflow.
     elsa.AddWorkflow<FlowDecisionWorkflow>();
     elsa.AddWorkflow<OnboardingWorkflow>();
+    elsa.AddWorkflow<OnboardingFlowchartWorkflow>();
 
     // Configure management feature to use EF Core.
     elsa.UseWorkflowManagement();
