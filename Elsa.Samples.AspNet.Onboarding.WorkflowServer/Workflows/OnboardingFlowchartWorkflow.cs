@@ -56,7 +56,22 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
 
         // Activities
         var createAccount = new WriteLine("建立員工帳號") { Name = "建立帳號" };
-        var addToFD = new WriteLine("新增帳號至 FD") { Name = "新增帳號至 FD" };
+        var addToFDFlow = new Sequence { Name = "新增帳號至 FD Flow" };
+        
+        addToFDFlow.Activities.Add(new Inline(_ =>
+        {
+            var random = new Random();
+            if (random.Next(0, 100) < 50)
+            {
+                throw new Exception("Random failure when adding user to FD system!");
+            }
+            
+            return default;
+        })
+        {
+            Name = "新增帳號至 FD: Step1",
+        });
+        
         var addToPY = new WriteLine("新增帳號至 PY") { Name = "新增帳號至 PY" };
         var notifyApprove = new WriteLine("審核結果 - 通過") { Name = "審核結果 - 通過" };
         var notifyReject = new WriteLine("審核結果 - 駁回") { Name = "審核結果 - 駁回" };
@@ -77,7 +92,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 reviewDecision,
                 notifyApprove,
                 notifyReject,
-                addToFD,
+                addToFDFlow,
                 addToPY,
                 finishSuccess,
                 failure
@@ -90,9 +105,9 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 new(new Endpoint(createAccount), new Endpoint(reviewEndpoint)),
                 new(new Endpoint(reviewEndpoint), new Endpoint(reviewDecision)),
                 new(new Endpoint(reviewDecision, "True"), new Endpoint(notifyApprove)),
-                new(new Endpoint(notifyApprove), new Endpoint(addToFD)),
+                new(new Endpoint(notifyApprove), new Endpoint(addToFDFlow)),
                 new(new Endpoint(notifyApprove), new Endpoint(addToPY)),
-                new(new Endpoint(addToFD), new Endpoint(finishSuccess)),
+                new(new Endpoint(addToFDFlow), new Endpoint(finishSuccess)),
                 new(new Endpoint(addToPY), new Endpoint(finishSuccess)),
                 new(new Endpoint(reviewDecision, "False"), new Endpoint(notifyReject)),
                 new(new Endpoint(notifyReject), new Endpoint(failure))
@@ -108,7 +123,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         SetDesignerMetadata(reviewEndpoint,         1300, 300);
         SetDesignerMetadata(reviewDecision,         1600, 300);
         SetDesignerMetadata(notifyApprove,          1900, 300);
-        SetDesignerMetadata(addToFD,                2200, 300);
+        SetDesignerMetadata(addToFDFlow,                2200, 300);
         SetDesignerMetadata(addToPY,                2200, 200);
         SetDesignerMetadata(finishSuccess,          2500, 300);
         SetDesignerMetadata(notifyReject,           1900, 400);
