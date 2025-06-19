@@ -57,10 +57,10 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         var createAccount = new WriteLine("建立員工帳號") { Name = "建立帳號" };
         var addToFD = new WriteLine("新增帳號至 FD") { Name = "新增帳號至 FD" };
         var addToPY = new WriteLine("新增帳號至 PY") { Name = "新增帳號至 PY" };
-        var notifySuccess = new WriteLine("通知結果 - 成功") { Name = "通知結果 - 成功" };
-        var notifyFailure = new WriteLine("通知結果 - 失敗") { Name = "通知結果 - 失敗" };
-        var finishApproved = new Finish { Name = "審核通過" };
-        var finishRejected = new Finish { Name = "審核失敗" };
+        var notifyApprove = new WriteLine("審核結果 - 通過") { Name = "審核結果 - 通過" };
+        var notifyReject = new WriteLine("審核結果 - 駁回") { Name = "審核結果 - 駁回" };
+        var finishSuccess = new Finish { Name = "流程結果 - 成功" };
+        var finishFailure = new Finish { Name = "流程結果 - 失敗" };
 
         // 決策: 依 reviewResultVariable
         var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context));
@@ -75,12 +75,12 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 createAccount,
                 reviewEndpoint,
                 reviewDecision,
-                notifySuccess,
-                notifyFailure,
+                notifyApprove,
+                notifyReject,
                 addToFD,
                 addToPY,
-                finishApproved,
-                finishRejected
+                finishSuccess,
+                finishFailure
             },
             Connections =
             {
@@ -89,14 +89,38 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 new(new Endpoint(writeWorkflowInstanceId), new Endpoint(createAccount)),
                 new(new Endpoint(createAccount), new Endpoint(reviewEndpoint)),
                 new(new Endpoint(reviewEndpoint), new Endpoint(reviewDecision)),
-                new(new Endpoint(reviewDecision, "True"), new Endpoint(notifySuccess)),
-                new(new Endpoint(notifySuccess), new Endpoint(addToFD)),
-                new(new Endpoint(notifySuccess), new Endpoint(addToPY)),
-                new(new Endpoint(addToFD), new Endpoint(finishApproved)),
-                new(new Endpoint(addToPY), new Endpoint(finishApproved)),
-                new(new Endpoint(reviewDecision, "False"), new Endpoint(notifyFailure)),
-                new(new Endpoint(notifyFailure), new Endpoint(finishRejected))
+                new(new Endpoint(reviewDecision, "True"), new Endpoint(notifyApprove)),
+                new(new Endpoint(notifyApprove), new Endpoint(addToFD)),
+                new(new Endpoint(notifyApprove), new Endpoint(addToPY)),
+                new(new Endpoint(addToFD), new Endpoint(finishSuccess)),
+                new(new Endpoint(addToPY), new Endpoint(finishSuccess)),
+                new(new Endpoint(reviewDecision, "False"), new Endpoint(notifyReject)),
+                new(new Endpoint(notifyReject), new Endpoint(finishFailure))
             }
+        };
+        
+        // 設定每個 activity 的 metadata 位置，讓流程圖整齊
+        // 主流程橫向排列在 y = 300
+        SetDesignerMetadata(onboardingEndpoint,      100, 300);
+        SetDesignerMetadata(setCorrelationId,        300, 300);
+        SetDesignerMetadata(writeWorkflowInstanceId, 500, 300);
+        SetDesignerMetadata(createAccount,           700, 300);
+        SetDesignerMetadata(reviewEndpoint,          900, 300);
+        SetDesignerMetadata(reviewDecision,         1100, 300);
+        SetDesignerMetadata(notifyApprove,          1300, 300);
+        SetDesignerMetadata(addToFD,                1500, 300);
+        SetDesignerMetadata(addToPY,                1500, 200);
+        SetDesignerMetadata(finishSuccess,          1700, 300);
+        SetDesignerMetadata(notifyReject,           1300, 400);
+        SetDesignerMetadata(finishFailure,          1500, 400);
+    }
+
+    private void SetDesignerMetadata(Activity activity, int x, int y, double width = 150, double height = 50)
+    {
+        activity.Metadata["designer"] = new 
+        {
+            position = new { x, y },
+            size = new { width, height }
         };
     }
 }

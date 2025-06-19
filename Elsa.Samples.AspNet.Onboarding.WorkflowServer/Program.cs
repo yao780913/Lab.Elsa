@@ -11,7 +11,7 @@ using WebhooksCore.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var dbPath = Path.Combine(AppContext.BaseDirectory, "elsa.db");
+var dbPath = Path.Combine(AppContext.BaseDirectory, "App_Data/elsa.db");
 var sqliteConnectionString = $"Data Source={dbPath}";
 
 // Add services to the container.
@@ -23,10 +23,11 @@ builder.Services.AddElsa(elsa =>
     elsa.AddWorkflow<OnboardingFlowchartWorkflow>();
 
     // Configure management feature to use EF Core.
-    elsa.UseWorkflowManagement(management => { management.UseEntityFrameworkCore(ef => ef.UseSqlite(sqliteConnectionString)); });
-
-    elsa.UseWorkflowRuntime(management => { management.UseEntityFrameworkCore(ef => ef.UseSqlite(sqliteConnectionString)); });
-
+    // elsa.UseWorkflowManagement(management => { management.UseEntityFrameworkCore(ef => ef.UseSqlite(sqliteConnectionString)); });
+    // elsa.UseWorkflowRuntime(management => { management.UseEntityFrameworkCore(ef => ef.UseSqlite(sqliteConnectionString)); });
+    elsa.UseWorkflowManagement();
+    elsa.UseWorkflowRuntime();
+    
     elsa.UseIdentity(identity =>
     {
         identity.TokenOptions = options =>
