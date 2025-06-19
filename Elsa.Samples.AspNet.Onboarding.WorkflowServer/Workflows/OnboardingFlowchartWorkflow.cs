@@ -61,7 +61,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         var notifyApprove = new WriteLine("審核結果 - 通過") { Name = "審核結果 - 通過" };
         var notifyReject = new WriteLine("審核結果 - 駁回") { Name = "審核結果 - 駁回" };
         var finishSuccess = new Finish { Name = "流程結果 - 成功" };
-        var finishFailure = new Finish { Name = "流程結果 - 失敗" };
+        var failure = new Fault { Name = "流程結果 - 失敗" };
 
         var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context)) { Name = "審核決策" };
 
@@ -80,7 +80,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 addToFD,
                 addToPY,
                 finishSuccess,
-                finishFailure
+                failure
             },
             Connections =
             {
@@ -95,7 +95,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
                 new(new Endpoint(addToFD), new Endpoint(finishSuccess)),
                 new(new Endpoint(addToPY), new Endpoint(finishSuccess)),
                 new(new Endpoint(reviewDecision, "False"), new Endpoint(notifyReject)),
-                new(new Endpoint(notifyReject), new Endpoint(finishFailure))
+                new(new Endpoint(notifyReject), new Endpoint(failure))
             }
         };
         
@@ -112,7 +112,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         SetDesignerMetadata(addToPY,                2200, 200);
         SetDesignerMetadata(finishSuccess,          2500, 300);
         SetDesignerMetadata(notifyReject,           1900, 400);
-        SetDesignerMetadata(finishFailure,          2200, 400);
+        SetDesignerMetadata(failure,                2200, 400);
     }
 
     private void SetDesignerMetadata(Activity activity, int x, int y, double width = 150, double height = 50)
