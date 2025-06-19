@@ -28,17 +28,18 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
             CanStartWorkflow = true,
             ParsedContent = new (employeeVariable)
         };
+        
         // 取得 correlationId 並存到變數
         var setCorrelationId = new SetVariable
         {
-            Name = "Set Correlation ID",
+            Name = "Set WorkflowInstanceId",
             Variable = correlationIdVar,
             Value = new(context => context.GetWorkflowExecutionContext().CorrelationId)
         };
         // 回傳 WorkflowInstanceId 給 client
         var writeWorkflowInstanceId = new WriteHttpResponse
         {
-            Name = "return  Workflow Instance ID",
+            Name = "return WorkflowInstanceId",
             Content = new(context => $"{{ \"workflowInstanceId\": \"{context.GetWorkflowExecutionContext().Id}\" }}"),
             ContentType = new("application/json")
         };
@@ -62,8 +63,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         var finishSuccess = new Finish { Name = "流程結果 - 成功" };
         var finishFailure = new Finish { Name = "流程結果 - 失敗" };
 
-        // 決策: 依 reviewResultVariable
-        var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context));
+        var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context)) { Name = "審核決策" };
 
         builder.Root = new Flowchart
         {
@@ -102,21 +102,23 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         // 設定每個 activity 的 metadata 位置，讓流程圖整齊
         // 主流程橫向排列在 y = 300
         SetDesignerMetadata(onboardingEndpoint,      100, 300);
-        SetDesignerMetadata(setCorrelationId,        300, 300);
-        SetDesignerMetadata(writeWorkflowInstanceId, 500, 300);
-        SetDesignerMetadata(createAccount,           700, 300);
-        SetDesignerMetadata(reviewEndpoint,          900, 300);
-        SetDesignerMetadata(reviewDecision,         1100, 300);
-        SetDesignerMetadata(notifyApprove,          1300, 300);
-        SetDesignerMetadata(addToFD,                1500, 300);
-        SetDesignerMetadata(addToPY,                1500, 200);
-        SetDesignerMetadata(finishSuccess,          1700, 300);
-        SetDesignerMetadata(notifyReject,           1300, 400);
-        SetDesignerMetadata(finishFailure,          1500, 400);
+        SetDesignerMetadata(setCorrelationId,        400, 300);
+        SetDesignerMetadata(writeWorkflowInstanceId, 700, 300);
+        SetDesignerMetadata(createAccount,          1000, 300);
+        SetDesignerMetadata(reviewEndpoint,         1300, 300);
+        SetDesignerMetadata(reviewDecision,         1600, 300);
+        SetDesignerMetadata(notifyApprove,          1900, 300);
+        SetDesignerMetadata(addToFD,                2200, 300);
+        SetDesignerMetadata(addToPY,                2200, 200);
+        SetDesignerMetadata(finishSuccess,          2500, 300);
+        SetDesignerMetadata(notifyReject,           1900, 400);
+        SetDesignerMetadata(finishFailure,          2200, 400);
     }
 
     private void SetDesignerMetadata(Activity activity, int x, int y, double width = 150, double height = 50)
     {
+        activity.SetDisplayText(activity.Name ?? activity.Type);
+        
         activity.Metadata["designer"] = new 
         {
             position = new { x, y },
