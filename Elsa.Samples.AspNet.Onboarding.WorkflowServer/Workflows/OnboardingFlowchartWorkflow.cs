@@ -19,31 +19,37 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         var reviewResultVariable = builder.WithVariable<bool>().WithMemoryStorage();
         var correlationIdVar = builder.WithVariable<string>().WithMemoryStorage();
 
-        // 1. 建立員工帳號 httpEndpoint
-        var onboardingEndpoint = new HttpEndpoint
+        var startProcessEndpoint = new Sequence
         {
-            Name = "Onboarding Endpoint",
-            Path = new ("onboarding"),
-            SupportedMethods = new ([HttpMethods.Post]),
-            CanStartWorkflow = true,
-            ParsedContent = new (employeeVariable)
+            Name = "Start Process",
+            Activities =
+            {
+                // 建立員工帳號 httpEndpoint
+                new HttpEndpoint
+                {
+                    Name = "Onboarding Endpoint",
+                    Path = new ("onboarding"),
+                    SupportedMethods = new ([HttpMethods.Post]),
+                    CanStartWorkflow = true,
+                    ParsedContent = new (employeeVariable)
+                },
+                // 取得 correlationId 並存到變數
+                new SetVariable
+                {
+                    Name = "Set WorkflowInstanceId",
+                    Variable = correlationIdVar,
+                    Value = new(context => context.GetWorkflowExecutionContext().CorrelationId)
+                },
+                // 回傳 WorkflowInstanceId 給 client
+                new WriteHttpResponse
+                {
+                    Name = "return WorkflowInstanceId",
+                    Content = new(context => $"{{ \"workflowInstanceId\": \"{context.GetWorkflowExecutionContext().Id}\" }}"),
+                    ContentType = new("application/json")
+                }
+            }
         };
         
-        // 取得 correlationId 並存到變數
-        var setCorrelationId = new SetVariable
-        {
-            Name = "Set WorkflowInstanceId",
-            Variable = correlationIdVar,
-            Value = new(context => context.GetWorkflowExecutionContext().CorrelationId)
-        };
-        // 回傳 WorkflowInstanceId 給 client
-        var writeWorkflowInstanceId = new WriteHttpResponse
-        {
-            Name = "return WorkflowInstanceId",
-            Content = new(context => $"{{ \"workflowInstanceId\": \"{context.GetWorkflowExecutionContext().Id}\" }}"),
-            ContentType = new("application/json")
-        };
-
         // 2. 新增審核 httpEndpoint
         var reviewEndpoint = new HttpEndpoint
         {
@@ -73,20 +79,18 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         });
         
         var addToPY = new WriteLine("新增帳號至 PY") { Name = "新增帳號至 PY" };
-        var notifyApprove = new WriteLine("審核結果 - 通過") { Name = "審核結果 - 通過" };
-        var notifyReject = new WriteLine("審核結果 - 駁回") { Name = "審核結果 - 駁回" };
+        var notifyApprove = new WriteLine("Review: Approve") { Name = "Review: Approve" };
+        var notifyReject = new WriteLine("Review: Reject") { Name = "Review: Reject" };
         var finishSuccess = new Finish { Name = "流程結果 - 成功" };
         var failure = new Fault { Name = "流程結果 - 失敗" };
 
-        var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context)) { Name = "審核決策" };
+        var reviewDecision = new FlowDecision(context => reviewResultVariable.Get(context)) { Name = "Review Result" };
 
         builder.Root = new Flowchart
         {
             Activities =
             {
-                onboardingEndpoint,
-                setCorrelationId,
-                writeWorkflowInstanceId,
+                startProcessEndpoint,
                 createAccount,
                 reviewEndpoint,
                 reviewDecision,
@@ -99,9 +103,7 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
             },
             Connections =
             {
-                new(new Endpoint(onboardingEndpoint), new Endpoint(setCorrelationId)),
-                new(new Endpoint(setCorrelationId), new Endpoint(writeWorkflowInstanceId)),
-                new(new Endpoint(writeWorkflowInstanceId), new Endpoint(createAccount)),
+                new(new Endpoint(startProcessEndpoint), new Endpoint(createAccount)),
                 new(new Endpoint(createAccount), new Endpoint(reviewEndpoint)),
                 new(new Endpoint(reviewEndpoint), new Endpoint(reviewDecision)),
                 new(new Endpoint(reviewDecision, "True"), new Endpoint(notifyApprove)),
@@ -116,18 +118,16 @@ public class OnboardingFlowchartWorkflow : WorkflowBase
         
         // 設定每個 activity 的 metadata 位置，讓流程圖整齊
         // 主流程橫向排列在 y = 300
-        SetDesignerMetadata(onboardingEndpoint,      100, 300);
-        SetDesignerMetadata(setCorrelationId,        400, 300);
-        SetDesignerMetadata(writeWorkflowInstanceId, 700, 300);
-        SetDesignerMetadata(createAccount,          1000, 300);
-        SetDesignerMetadata(reviewEndpoint,         1300, 300);
-        SetDesignerMetadata(reviewDecision,         1600, 300);
-        SetDesignerMetadata(notifyApprove,          1900, 300);
-        SetDesignerMetadata(addToFDFlow,                2200, 300);
-        SetDesignerMetadata(addToPY,                2200, 200);
-        SetDesignerMetadata(finishSuccess,          2500, 300);
-        SetDesignerMetadata(notifyReject,           1900, 400);
-        SetDesignerMetadata(failure,                2200, 400);
+        SetDesignerMetadata(startProcessEndpoint,    100, 300);
+        SetDesignerMetadata(createAccount,           400, 300);
+        SetDesignerMetadata(reviewEndpoint,          700, 300);
+        SetDesignerMetadata(reviewDecision,         1000, 300);
+        SetDesignerMetadata(notifyApprove,          1300, 300);
+        SetDesignerMetadata(addToFDFlow,            1600, 300);
+        SetDesignerMetadata(addToPY,                1600, 200);
+        SetDesignerMetadata(finishSuccess,          1900, 300);
+        SetDesignerMetadata(notifyReject,           1300, 400);
+        SetDesignerMetadata(failure,                1600, 400);
     }
 
     private void SetDesignerMetadata(Activity activity, int x, int y, double width = 150, double height = 50)
